@@ -4,10 +4,12 @@ import numpy as np
 import torch
 import torch.nn as nn
 
-from pytorch3d.renderer import (BlendParams, MeshRasterizer, MeshRenderer,
-                                OpenGLOrthographicCameras, PointLights,
-                                RasterizationSettings, SoftSilhouetteShader,
-                                TexturedSoftPhongShader)
+from pytorch3d.renderer.cameras import OpenGLOrthographicCameras
+from pytorch3d.renderer.mesh.renderer import MeshRenderer
+from pytorch3d.renderer.mesh.shader import (BlendParams, PointLights,
+                                            SoftSilhouetteShader,
+                                            TexturedSoftPhongShader)
+from pytorch3d.renderer.mesh.rasterizer import (MeshRasterizer, RasterizationSettings)
 from pytorch3d.structures import Meshes
 
 

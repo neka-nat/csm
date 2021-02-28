@@ -6,7 +6,7 @@ import cv2
 import numpy as np
 import torch
 from PIL import Image
-from pytorch3d.structures import Textures
+from pytorch3d.renderer.mesh import Textures
 
 from src.nnutils.geometry import convert_3d_to_uv_coordinates
 
@@ -146,7 +146,7 @@ def get_template_texture(vertices: torch.tensor, faces: torch.tensor, texture_ma
     vertex_rgb = torch.nn.functional.grid_sample(texture_map.unsqueeze(0),
                                                  2 * verts_uv.unsqueeze(0).unsqueeze(0) - 1)
     vertex_rgb = vertex_rgb.squeeze(2).permute(0, 2, 1) * 255
-    texture = Textures([texture_map.cpu().permute(1, 2, 0)],
+    texture = Textures([texture_map.permute(1, 2, 0)],
                        faces_uvs=faces.unsqueeze(0),
                        verts_uvs=verts_uv.unsqueeze(0),
                        verts_rgb=vertex_rgb).to(device)
